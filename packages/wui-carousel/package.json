@@ -1,0 +1,26 @@
+{
+  "name": "wui-carousel",
+  "version": "0.0.1",
+  "description": "lit based carousel element, pass the data as array of objects ",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muneerzargar/WUI-Components.git"
+  },
+  "keywords": [
+    "webcomponents",
+    "carousel"
+  ],
+  "author": "wui-components",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/muneerzargar/WUI-Components/issues"
+  },
+  "homepage": "https://github.com/muneerzargar/WUI-Components#readme"
+}
