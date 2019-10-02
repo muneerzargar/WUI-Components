@@ -77,6 +77,7 @@ wui-carousel component is JSON/data driven generic component which takes array o
 
 # TODO 
 * Add maximum slides to be present.
+* Add icons for left and right.
 * Add indicators type for bottom navigation.
 * Add default animation.
 * Add css mixins.
