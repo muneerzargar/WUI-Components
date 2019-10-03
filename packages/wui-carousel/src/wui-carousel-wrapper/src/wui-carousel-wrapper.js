@@ -25,11 +25,12 @@ export class WuiCarouselWrapper extends LitElement {
                 position: relative;
             }
             ul {
+                display: inline-block;
+                list-style: none;
                 margin: 0;
                 padding: 0;
-                list-style: none;
-                display: inline-block;
                 position: relative;
+                width: 100%;
             }
             #oldCarouselWrapper {
                 position: absolute;
@@ -77,7 +78,7 @@ export class WuiCarouselWrapper extends LitElement {
         <style>
             
         </style>
-        ${this.__getItemsTemplate(this.carouselItems)}
+        ${this.carouselItems.length > 0 ? html `${this.__getItemsTemplate(this.carouselItems)}`: null}
         ${this.enableCounter && this.carouselItems.length > 0 ? html `
             <div class= 'wui-carousel-counter'>
                 ${this.currentIndex + 1} / ${this.carouselItems.length}

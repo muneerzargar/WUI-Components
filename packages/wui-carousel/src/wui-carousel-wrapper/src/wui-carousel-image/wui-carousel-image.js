@@ -14,6 +14,7 @@ class WuiCarouselImage extends LitElement {
                 display: block;
             }
             img {
+                width: 100%;
                 max-width: 100%;
             }
         `

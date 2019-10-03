@@ -43,7 +43,7 @@ export class WuiCarousel extends LitElement {
     render() {
         return html `
             <wui-carousel-wrapper 
-                .carouselItems= "${this.__getItems(this.carouselConfig.items, 'wrapper')}"
+                .carouselItems= "${this.__getItems(this.carouselConfig, 'wrapper')}"
                 .currentIndex= "${this.itemIndex}"
                 .prevIndex="${this.oldItemIndex }"
                 .enableCounter= "${this.carouselConfig.enableCounter}"
@@ -52,7 +52,7 @@ export class WuiCarousel extends LitElement {
             >
             </wui-carousel-wrapper>
             <wui-carousel-navigation 
-                .navigationItems= "${this.__getItems(this.carouselConfig.items, 'navigationBottom')}"
+                .navigationItems= "${this.__getItems(this.carouselConfig, 'navigationBottom')}"
                 .currentItemIndex= "${this.itemIndex}"
                 @selected-item= "${this.__setSelectedIndex}"
                 >
@@ -64,8 +64,11 @@ export class WuiCarousel extends LitElement {
          this.itemIndex = event.detail.selectedIndex;
     }
 
-    __getItems(list = [] , listType) {
-        return list.map((item) => {
+    __getItems({items = [] , maxItems}, listType) {
+        // maximum items to be displayed in the UI.
+        const maxAllowed = 4;
+        const renderedList = items.slice(0, maxItems || maxAllowed);
+        return renderedList.map((item) => {
             if(listType === 'wrapper') {
                 const {type, src, altText} = item;
                 const listItem = {

@@ -29,56 +29,64 @@
     items: [
       {
         type:'image',
-        src: 'https://cdn.pixabay.com/photo/2016/11/19/15/32/business-1839876_1280.jpg',
-        altText: 'code image',
+        src: 'https://image.shutterstock.com/image-photo/foggy-forest-gloomy-landscape-600w-431158630.jpg',
+        altText: 'nature 1',
         thumbnail: {
-          src: 'https://cdn.pixabay.com/photo/2016/11/19/15/32/business-1839876_1280.jpg',
-          altText: 'code thumb',
+          src: 'https://image.shutterstock.com/image-photo/foggy-forest-gloomy-landscape-600w-431158630.jpg',
+          altText: 'thumb 1',
         }
       },
       {
         type:'image',
-        src: 'https://cdn.pixabay.com/photo/2016/03/09/09/17/computer-1245714_1280.jpg',
-        altText: 'image windows',
+        src: 'https://cdn.pixabay.com/photo/2014/09/07/22/17/forest-438432_1280.jpg',
+        altText: 'nature 2',
         thumbnail: {
-          src: 'https://cdn.pixabay.com/photo/2016/03/09/09/17/computer-1245714_1280.jpg',
-          altText: 'thumb2',
+          src: 'https://cdn.pixabay.com/photo/2014/09/07/22/17/forest-438432_1280.jpg',
+          altText: 'thumb 2',
         }
       },
       {
         type:'image',
-        src: 'https://cdn.pixabay.com/photo/2016/11/19/15/32/business-1839876_1280.jpg',
-        altText: 'code image',
+        src: 'https://cdn.pixabay.com/photo/2016/07/22/16/29/fog-1535201_1280.jpg',
+        altText: 'nature 3',
         thumbnail: {
-          src: 'https://cdn.pixabay.com/photo/2016/11/19/15/32/business-1839876_1280.jpg',
-          altText: 'code thumb',
+          src: 'https://cdn.pixabay.com/photo/2016/07/22/16/29/fog-1535201_1280.jpg',
+          altText: 'thumb 3',
         }
       },
       {
         type:'image',
-        src: 'https://cdn.pixabay.com/photo/2016/03/09/09/17/computer-1245714_1280.jpg',
-        altText: 'image windows',
+        src: 'https://image.shutterstock.com/image-photo/forest-road-green-foggy-sun-260nw-569035624.jpg',
+        altText: 'nature 4',
         thumbnail: {
-          src: 'https://cdn.pixabay.com/photo/2016/03/09/09/17/computer-1245714_1280.jpg',
-          altText: 'thumb2',
+          src: 'https://image.shutterstock.com/image-photo/forest-road-green-foggy-sun-260nw-569035624.jpg',
+          altText: 'thumb 4',
         }
       },
       {
         type:'image',
-        src: 'https://cdn.pixabay.com/photo/2016/11/19/15/32/business-1839876_1280.jpg',
-        altText: 'code image',
+        src: 'https://cdn.pixabay.com/photo/2016/11/14/04/45/elephant-1822636_1280.jpg',
+        altText: 'nature 5',
         thumbnail: {
-          src: 'https://cdn.pixabay.com/photo/2016/11/19/15/32/business-1839876_1280.jpg',
-          altText: 'code thumb',
+          src: 'https://cdn.pixabay.com/photo/2016/11/14/04/45/elephant-1822636_1280.jpg',
+          altText: 'thumb 5',
+        }
+      },
+      {
+        type:'image',
+        src: 'https://cdn.pixabay.com/photo/2016/11/14/04/45/elephant-1822636_1280.jpg',
+        altText: 'nature 5',
+        thumbnail: {
+          src: 'https://cdn.pixabay.com/photo/2016/11/14/04/45/elephant-1822636_1280.jpg',
+          altText: 'thumb 5',
         }
       }
     ],
     enableFullScreen: true,
     enableCounter: true,
     enableArrows: true,
-    enableIndicators: false,
-    enableThumbnails: true
-
+    indicatorType: 'thumbnail', 
+    maxItems: 5
   }
 
   const element = browser.document.querySelector('wui-carousel');
