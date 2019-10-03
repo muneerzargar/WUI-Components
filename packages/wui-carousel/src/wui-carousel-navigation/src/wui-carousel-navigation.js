@@ -9,6 +9,7 @@ export class WuiCarouselNavigation extends LitElement {
             navigationItems: { type: Array },
             currentItemIndex: {type: Number},
             activeClass: {type: Boolean},
+            indicatorType: {type: String},
         };
     }
 
@@ -34,14 +35,32 @@ export class WuiCarouselNavigation extends LitElement {
             li:first-child {
                 margin-left: 0;
             }
-            wui-carousel-image {
+            wui-carousel-image, .wui-carousel-custom-nav {
                 display: block;
                 box-shadow: 0px 4px 10px 2px rgba(168,166,168,1);
             }
+
+            .wui-carousel-custom-nav {
+                background: #adadad;
+                border-radius: 50%;
+                cursor: pointer;
+                height: 18px;
+                width: 18px; 
+            }
+
+            .wui-carousel-custom-nav input[type = "radio"] {
+                visibility : hidden;
+            }
+            
             .wui-carousel-active-item {
                 opacity: 1;
                 position: relative;
             }
+            
+            .wui-carousel-active-item .wui-carousel-custom-nav {
+                background: #333333;
+            }
+
             .wui-carousel-active-item__selected {
                 bottom: 0;
                 border-bottom: 4px solid #ff5900;
@@ -59,7 +78,7 @@ export class WuiCarouselNavigation extends LitElement {
 
     render() {
         return html `
-        ${this.navigationItems && this.navigationItems.length > 0 ? this.__getItemsTemplate(this.navigationItems) : null }
+        ${(this.indicatorType) && this.navigationItems && this.navigationItems.length > 0 ? this.__getItemsTemplate(this.navigationItems) : null }
         `
     }
 
@@ -70,18 +89,36 @@ export class WuiCarouselNavigation extends LitElement {
             ${templateItems.map((item, index) => html `
                 <li class= "${classMap({'wui-carousel-active-item': this.currentItemIndex === index})}" role= 'button' 
                     @click= "${() => this.__onNavigationClick(index)}">
-                        <wui-carousel-image .imageItem="${item}"></wui-carousel-image>
-                        <!-- check better way. -->
-                        ${this.currentItemIndex === index ?
-                            html`<div class="wui-carousel-active-item__selected"></div>`:
-                            null
-                        }
+                        ${this.__getIndicatorList(item, index)}
                 </li>`
             )}
         </ul>
         `
     }
 
+    __getIndicatorList(item, key) {
+        switch(this.indicatorType) {
+            case 'thumbnail': {
+                return html `
+                    <wui-carousel-image .imageItem="${item}"></wui-carousel-image>
+                    <!-- check better way. -->
+                    ${this.currentItemIndex === key ?
+                        html`<div class="wui-carousel-active-item__selected"></div>`:
+                        null
+                    }
+                `
+            }
+            case 'custom': {
+                return html `
+                    <label class="wui-carousel-custom-nav">
+                        <input type="radio" name="indicator" value= "${key}">
+                    </label>
+                `
+            }
+            default: 
+                break;
+        }
+    }
 
     __onNavigationClick(currentIndex) {
         this.dispatchEvent(new CustomEvent('selected-item', { detail: {selectedIndex: currentIndex}}));

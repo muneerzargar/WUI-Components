@@ -80,7 +80,7 @@ wui-carousel component is JSON/data driven generic component which takes array o
 * Add icons for left and right.
 * Add indicators type for bottom navigation.
 * Add default animation.
-* Add css mixins.
+* Add css varaibles and mixins.
 * Add gestures.
 * Add tests.
 * Add story.

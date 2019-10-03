@@ -54,6 +54,7 @@ export class WuiCarousel extends LitElement {
             <wui-carousel-navigation 
                 .navigationItems= "${this.__getItems(this.carouselConfig, 'navigationBottom')}"
                 .currentItemIndex= "${this.itemIndex}"
+                .indicatorType= "${this.carouselConfig.indicatorType}"
                 @selected-item= "${this.__setSelectedIndex}"
                 >
             </wui-carousel-navigation>
