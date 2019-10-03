@@ -64,6 +64,17 @@ export class WuiCarouselWrapper extends LitElement {
                 z-index: 1;
                 padding: 0;
             }
+
+            .wui-carousel-button svg {
+                display: block;
+                height: 26px;
+                width: 23px;
+                pointer-events: none;
+                padding: 0 8px;
+                stroke: #1e1d31;
+                stroke-width: 0px; 
+            }   
+            
             #left {
                 left: 15px;
             }
@@ -90,8 +101,22 @@ export class WuiCarouselWrapper extends LitElement {
 
     __getArrowsTemplate() {
         return html `
-            <button id= 'left' name= 'left' class= 'wui-carousel-button' @click= "${this.__onBtnClick}">left</button>
-            <button id= 'right' name= 'right' class= 'wui-carousel-button' @click= "${this.__onBtnClick}">right</button>
+            <button id= 'left' name= 'left' class= 'wui-carousel-button' @click= "${this.__onBtnClick}">
+                <svg viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet" 
+                    focusable="false">
+                    <g viewBox="0 0 16 16">
+                        <path d="M11.5,3.591L9.969,2L4.711,7.469C4.572,7.615,4.5,7.808,4.5,8s0.072,0.385,0.211,0.531L9.969,14l1.53-1.591L7.262,8L11.5,3.591z"></path>
+                    </g>
+                </svg>  
+            </button>
+            <button id= 'right' name= 'right' class= 'wui-carousel-button' @click= "${this.__onBtnClick}">
+                <svg viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet" 
+                    focusable="false">
+                    <g viewBox="0 0 16 16">
+                        <path d="M11.288,7.469L6.03,2L4.5,3.591L8.739,8L4.5,12.409L6.03,14l5.258-5.469C11.43,8.385,11.5,8.192,11.5,8S11.43,7.615,11.288,7.469z"></path>
+                    </g>
+                </svg>
+            </button>
         `
     }
 
