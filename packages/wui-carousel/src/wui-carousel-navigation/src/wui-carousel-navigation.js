@@ -30,7 +30,7 @@ export class WuiCarouselNavigation extends LitElement {
                 cursor: pointer;
                 margin-left: 16px;
                 max-width: 122px;
-                opacity: 0.8;
+                opacity: 0.7;
             }
             li:first-child {
                 margin-left: 0;

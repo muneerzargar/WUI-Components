@@ -1,10 +1,5 @@
-/* TODO - Convert this to TS 
-* Add generic interface file.
-* Add return type for the functions and use decorators.
-* Add tests.
-* Add story.
-*/
 import {LitElement, html, css} from 'lit-element';
+import {classMap} from 'lit-html/directives/class-map.js';
 import './wui-carousel-image/wui-carousel-image.js';
 
 
@@ -23,18 +18,21 @@ export class WuiCarouselWrapper extends LitElement {
             :host {
                 display: block;
                 position: relative;
+                overflow: hidden; 
             }
             ul {
-                display: inline-block;
                 list-style: none;
                 margin: 0;
                 padding: 0;
-                position: relative;
                 width: 100%;
             }
-            #oldCarouselWrapper {
+            #oldCarousel {
                 position: absolute;
-                z-index: -1;
+                width: 100%;
+            }
+            #newCarousel {
+                position: relative;
+                z-index: 1;
             }
             .wui-carousel-counter {
                 background : #999999;
@@ -47,7 +45,8 @@ export class WuiCarouselWrapper extends LitElement {
                 opacity: 0.8;
                 right: 15px;
                 text-align: center;
-                width: 50px; 
+                width: 50px;
+                z-index: 1; 
             }
             .wui-carousel-button {
                 background: #fafafa;
@@ -61,10 +60,9 @@ export class WuiCarouselWrapper extends LitElement {
                 position: absolute;
                 top: 0;
                 width: 45px;
-                z-index: 1;
+                z-index: 5;
                 padding: 0;
             }
-
             .wui-carousel-button svg {
                 display: block;
                 height: 26px;
@@ -74,13 +72,58 @@ export class WuiCarouselWrapper extends LitElement {
                 stroke: #1e1d31;
                 stroke-width: 0px; 
             }   
-            
             #left {
                 left: 15px;
             }
             #right {
                 right: 15px;
             }
+            .wui-old-carousel-slide-out {
+                animation: wui-old-carousel-slide-out 700ms forwards;
+            }
+            .wui-new-carousel-slide-out {
+                animation: wui-new-carousel-slide-out 700ms forwards;
+            }
+            .wui-old-carousel-slide-in {
+                animation: wui-old-carousel-slide-in 700ms forwards;
+            }
+            .wui-new-carousel-slide-in {
+                animation: wui-new-carousel-slide-in 700ms forwards;
+            }
+            @keyframes wui-old-carousel-slide-in {
+                0% {
+                    transform: translateX(50%);
+                }
+                100% {
+                    transform: translateX(-100%);
+                }
+                
+            }
+            @keyframes wui-old-carousel-slide-out {
+                0% {
+                    transform: translateX(0%);
+                }
+                100% {
+                    transform: translateX(100%);
+                }
+            }
+            @keyframes wui-new-carousel-slide-in {
+                0% {
+                    transform: translateX(100%);
+                }
+                100% {
+                    transform: translateX(0%);
+                }
+                
+            }
+            @keyframes wui-new-carousel-slide-out {
+                0% {
+                    transform: translateX(-100%);
+                }
+                100% {
+                    transform: translateX(0%);
+                }
+            }  
         `
     }
 
@@ -97,6 +140,50 @@ export class WuiCarouselWrapper extends LitElement {
         `: null}
         ${this.enableArrows && this.carouselItems.length > 0 ? this.__getArrowsTemplate(): null}
         `
+    }
+
+    __getItemsTemplate(items) {
+        const templateItems = items.slice();
+        return html `
+        <ul>
+            <li id='oldCarousel' role='button' aria-hidden = 'true' class='${this.__getAnimationCssClass()}'>
+                ${this.__getItemType(templateItems[this.prevIndex])}
+            </li>
+            <li id='newCarousel' role='button' class='${this.__getAnimationCssClass()}'>
+                ${this.__getItemType(templateItems[this.currentIndex])}
+            </li>
+        </ul>
+        `
+    }
+
+    __getAnimationCssClass() {
+        const liGroup = this.shadowRoot.querySelectorAll('li');
+        if(liGroup.length === 0) {
+            return ''
+        }
+        liGroup.forEach((li)=> {
+            li.className = '';
+            setTimeout(()=> {
+                // right for slide-in, left for slide-out ..
+                if(li.id === 'oldCarousel') {
+                    li.className = (this.currentIndex < this.prevIndex) ? 'wui-old-carousel-slide-out' : 'wui-old-carousel-slide-in';
+                }
+                else if(li.id === 'newCarousel') {
+                    li.className = (this.currentIndex < this.prevIndex) ? 'wui-new-carousel-slide-out' : 'wui-new-carousel-slide-in';
+                }
+            }, 0);
+        });  
+    }
+
+    __getItemType(item) {
+        switch (item.type) {
+            case 'image': {
+                return html`<wui-carousel-image .imageItem="${item}"></wui-carousel-image>`;
+            }
+            default : {
+                break;
+            }
+        }
     }
 
     __getArrowsTemplate() {
@@ -118,32 +205,6 @@ export class WuiCarouselWrapper extends LitElement {
                 </svg>
             </button>
         `
-    }
-
-    // __getDirection(oldIndex, currentIndex) {
-    //     this.direction = (oldIndex || currentIndex < oldIndex )  ? 'left' : 'right';
-    //     console.log(this.direction);
-    // }
-
-    __getItemsTemplate(items) {
-        const templateItems = items.slice();
-        return html `
-        <ul>
-            <li id='oldCarouselWrapper' role='button' aria-hidden = 'true' >${this.__getItemType(templateItems[this.prevIndex])}</li>
-            <li id='newCarouselWrapper' role='button' >${this.__getItemType(templateItems[this.currentIndex])}</li>
-        </ul>
-        `
-    }
-
-    __getItemType(item) {
-        switch (item.type) {
-            case 'image': {
-                return html`<wui-carousel-image .imageItem="${item}"></wui-carousel-image>`;
-            }
-            default : {
-                break;
-            }
-        }
     }
 
     __onBtnClick(event) {
@@ -169,7 +230,6 @@ export class WuiCarouselWrapper extends LitElement {
         }
 
     }
-
 
 }
 
