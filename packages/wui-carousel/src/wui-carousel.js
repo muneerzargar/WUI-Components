@@ -14,7 +14,7 @@ export class WuiCarousel extends LitElement {
 
     static get styles() {
         return css `
-            :host {
+            .wui-carousel {
                 display: block;
             }
         `
@@ -43,22 +43,25 @@ export class WuiCarousel extends LitElement {
 
     render() {
         return html `
-            <wui-carousel-wrapper 
-                .carouselItems= "${this.__getItems(this.carouselConfig, 'wrapper')}"
-                .currentIndex= "${this.itemIndex}"
-                .prevIndex="${this.oldItemIndex }"
-                .enableCounter= "${this.carouselConfig.enableCounter}"
-                .enableArrows= "${this.carouselConfig.enableArrows}"
-                @selected-item= "${this.__setSelectedIndex}"
-            >
-            </wui-carousel-wrapper>
-            <wui-carousel-navigation 
-                .navigationItems= "${this.__getItems(this.carouselConfig, 'navigationBottom')}"
-                .currentItemIndex= "${this.itemIndex}"
-                .indicatorType= "${this.carouselConfig.indicatorType}"
-                @selected-item= "${this.__setSelectedIndex}"
+            <div class= "wui-carousel">
+                <wui-carousel-wrapper 
+                    .carouselItems= "${this.__getItems(this.carouselConfig, 'wrapper')}"
+                    .currentIndex= "${this.itemIndex}"
+                    .prevIndex="${this.oldItemIndex }"
+                    .enableCounter= "${this.carouselConfig.enableCounter}"
+                    .enableArrows= "${this.carouselConfig.enableArrows}"
+                    @selected-item= "${this.__setSelectedIndex}"
                 >
-            </wui-carousel-navigation>
+                </wui-carousel-wrapper>
+                <wui-carousel-navigation 
+                    .navigationItems= "${this.__getItems(this.carouselConfig, 'navigationBottom')}"
+                    .currentItemIndex= "${this.itemIndex}"
+                    .indicatorType= "${this.carouselConfig.indicatorType}"
+                    @selected-item= "${this.__setSelectedIndex}"
+                    exportparts="wui-carousel-custom-nav: wui-carousel-custom-nav"
+                    >
+                </wui-carousel-navigation>
+            </div>
         `
     }
 

@@ -1,7 +1,5 @@
 import {LitElement, html, css} from 'lit-element';
-import {classMap} from 'lit-html/directives/class-map.js';
 import './wui-carousel-image/wui-carousel-image.js';
-
 
 export class WuiCarouselWrapper extends LitElement {
 
@@ -35,10 +33,10 @@ export class WuiCarouselWrapper extends LitElement {
                 z-index: 1;
             }
             .wui-carousel-counter {
-                background : #999999;
+                background : var(--wui-carousel-counter-bg, #999999);
                 border-radius: 4px;
                 bottom: 15px;
-                color: #fafafa;
+                color: var(--wui-carousel-counter-color, #fafafa);;
                 display: block;
                 padding: 5px;
                 position: absolute;
@@ -49,11 +47,11 @@ export class WuiCarouselWrapper extends LitElement {
                 z-index: 1; 
             }
             .wui-carousel-button {
-                background: #fafafa;
-                border: 3px solid #1e1d31;
+                background: var(--wui-carousel-button-bg, #fafafa);
+                border: var(--wui-carousel-button-border, 3px solid #1e1d31); ;
                 border-radius: 50%;
                 bottom: 0;
-                color: #1e1d31;
+                color: var(--wui-carousel-button-color, #1e1d31);
                 cursor: pointer;
                 height: 45px;
                 margin: auto;
@@ -69,7 +67,7 @@ export class WuiCarouselWrapper extends LitElement {
                 width: 23px;
                 pointer-events: none;
                 padding: 0 8px;
-                stroke: #1e1d31;
+                stroke: var(--wui-carousel-button-stroke, #1e1d31);
                 stroke-width: 0px; 
             }   
             #left {
@@ -127,11 +125,18 @@ export class WuiCarouselWrapper extends LitElement {
         `
     }
 
+    firstUpdated() {
+        this.__touchstartX = 0;
+        this.shadowRoot.querySelector('ul').addEventListener('touchstart', this.__touchstart.bind(this));
+        this.shadowRoot.querySelector('ul').addEventListener('touchend', this.__touchend.bind(this));
+    }
+
+    updated() {
+        this.__getAnimationCssClass();
+    }
+
     render() {
         return html `
-        <style>
-            
-        </style>
         ${this.carouselItems.length > 0 ? html `${this.__getItemsTemplate(this.carouselItems)}`: null}
         ${this.enableCounter && this.carouselItems.length > 0 ? html `
             <div class= 'wui-carousel-counter'>
@@ -146,30 +151,48 @@ export class WuiCarouselWrapper extends LitElement {
         const templateItems = items.slice();
         return html `
         <ul>
-            <li id='oldCarousel' role='button' aria-hidden = 'true' class='${this.__getAnimationCssClass()}'>
+            <li id='oldCarousel' role='button' aria-hidden = 'true'>
                 ${this.__getItemType(templateItems[this.prevIndex])}
             </li>
-            <li id='newCarousel' role='button' class='${this.__getAnimationCssClass()}'>
+            <li id='newCarousel' role='button'>
                 ${this.__getItemType(templateItems[this.currentIndex])}
             </li>
         </ul>
         `
     }
 
+    __touchstart(event) {
+        this.__touchstartX = event.touches[0].clientX;
+    }
+
+    __touchend(event) {
+        const offset = 100;
+        if(this.__touchstartX) {
+           const touchEnd = event.changedTouches[0].clientX;
+            if(touchEnd > this.__touchstartX + offset) {
+                this.__onItemChange('right');
+            }
+            if(touchEnd < this.__touchstartX - offset) {
+                this.__onItemChange('left');
+            }
+        }
+    }
+ 
     __getAnimationCssClass() {
         const liGroup = this.shadowRoot.querySelectorAll('li');
-        if(liGroup.length === 0) {
-            return ''
+        if(this.currentIndex === this.prevIndex) {
+            return;
         }
         liGroup.forEach((li)=> {
-            li.className = '';
+            const list = li
+            list.className = '';
             setTimeout(()=> {
                 // right for slide-in, left for slide-out ..
-                if(li.id === 'oldCarousel') {
-                    li.className = (this.currentIndex < this.prevIndex) ? 'wui-old-carousel-slide-out' : 'wui-old-carousel-slide-in';
+                if(list.id === 'oldCarousel') {
+                    list.className = (this.currentIndex < this.prevIndex) ? 'wui-old-carousel-slide-out' : 'wui-old-carousel-slide-in';
                 }
-                else if(li.id === 'newCarousel') {
-                    li.className = (this.currentIndex < this.prevIndex) ? 'wui-new-carousel-slide-out' : 'wui-new-carousel-slide-in';
+                else if(list.id === 'newCarousel') {
+                    list.className = (this.currentIndex < this.prevIndex) ? 'wui-new-carousel-slide-out' : 'wui-new-carousel-slide-in';
                 }
             }, 0);
         });  
@@ -188,7 +211,7 @@ export class WuiCarouselWrapper extends LitElement {
 
     __getArrowsTemplate() {
         return html `
-            <button id= 'left' name= 'left' class= 'wui-carousel-button' @click= "${this.__onBtnClick}">
+            <button id= 'left' name= 'left' class= 'wui-carousel-button' @click= "${(event) => this.__onItemChange(event.target.name)}">
                 <svg viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet" 
                     focusable="false">
                     <g viewBox="0 0 16 16">
@@ -196,7 +219,7 @@ export class WuiCarouselWrapper extends LitElement {
                     </g>
                 </svg>  
             </button>
-            <button id= 'right' name= 'right' class= 'wui-carousel-button' @click= "${this.__onBtnClick}">
+            <button id= 'right' name= 'right' class= 'wui-carousel-button' @click= "${(event) => this.__onItemChange(event.target.name)}">
                 <svg viewBox="0 0 16 16" preserveAspectRatio="xMidYMid meet" 
                     focusable="false">
                     <g viewBox="0 0 16 16">
@@ -207,10 +230,9 @@ export class WuiCarouselWrapper extends LitElement {
         `
     }
 
-    __onBtnClick(event) {
-        const {name} = event.target;
+    __onItemChange(direction) {
         let currentIndex = 0;
-        switch(name) {
+        switch(direction) {
             case 'left': {
                 if (this.currentIndex > 0 && this.currentIndex < this.carouselItems.length) {
                     currentIndex =this.currentIndex - 1;
