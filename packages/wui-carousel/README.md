@@ -60,14 +60,15 @@ wui-carousel component is JSON/data driven generic component which takes array o
     enableFullScreen: true,
     enableCounter: true,
     enableArrows: true,
-    enableIndicators: false,
-    enableThumbnails: true
+    indicatorType: 'thumbnail'
 
   }
 
   const element = browser.document.querySelector('wui-carousel');
-  element.carouselConfig = carouselData;
-  console.log(element.carouselconfig);
+  element.carouselItems = carouselData.items;
+  element.enableCounter = carouselData.enableCounter;
+  element.enableArrows = carouselData.enableArrows;
+  element.indicatorType = carouselData.indicatorType;
 
 })(window);
 </script>
@@ -82,8 +83,11 @@ wui-carousel component is JSON/data driven generic component which takes array o
 * Add default animation.
 * Add css varaibles and mixins.
 * Add gestures.
-* Add tests.
 * Add story.
+* Add TypeScript.
+* Add generic interface file.
+* Add return type for the functions and use decorators.
+* Add tests.
 
 # After TODO.
 * set up npm package and publish.
@@ -91,9 +95,7 @@ wui-carousel component is JSON/data driven generic component which takes array o
 # Release 1.0.0
 * Check if custom Animation is supported out of box with mixins or other solution is needed. 
 * Verify and add the desired animation.
-* Add Typescript.
-* Add generic interface file.
-* Add return type for the functions and use decorators.
+* Add list of supported browsers.
 
 # Release 1.1.0
 * Add support for html tags.

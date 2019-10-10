@@ -34,7 +34,9 @@
 </head>
 <body>
   <div style="width: 600px; margin: 20px auto">
-    <wui-carousel></wui-carousel>
+    <wui-carousel enableFullScreen enableCounter 
+      enableArrows indicatorType='thumbnail' maxItems= 5>
+    </wui-carousel>
   </div>  
 </body>
 <script>
@@ -105,7 +107,7 @@
   }
 
   const element = browser.document.querySelector('wui-carousel');
-  element.carouselConfig = carouselData;
+  element.carouselItems = carouselData.items;
 
 })(window);
 </script>

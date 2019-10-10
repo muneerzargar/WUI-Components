@@ -6,9 +6,13 @@ export class WuiCarousel extends LitElement {
     
     static get properties() {
         return {
-            carouselConfig : {type: Object },
+            carouselItems : {type: Array },
+            enableFullScreen: {type: Boolean},
+            enableCounter: {type: Boolean},
+            enableArrows: {type: Boolean},
+            indicatorType: {type: String}, 
+            maxItems: {type: Number},
             itemIndex: {type: Number},
-            oldItemIndex: {type: Number},
         }
     }
 
@@ -22,8 +26,11 @@ export class WuiCarousel extends LitElement {
 
     constructor() {
         super();
+        this.carouselItems = [];
         this.itemIndex = 0;
         this.oldItemIndex = 0;
+        this.enableArrows = true;
+        this.enableCounter = true;
     }
 
     shouldUpdate(changedProperties) {
@@ -45,18 +52,18 @@ export class WuiCarousel extends LitElement {
         return html `
             <div class= "wui-carousel">
                 <wui-carousel-wrapper 
-                    .carouselItems= "${this.__getItems(this.carouselConfig, 'wrapper')}"
+                    .carouselItems= "${this.__getItems(this.carouselItems, 'wrapper')}"
                     .currentIndex= "${this.itemIndex}"
                     .prevIndex="${this.oldItemIndex }"
-                    .enableCounter= "${this.carouselConfig.enableCounter}"
-                    .enableArrows= "${this.carouselConfig.enableArrows}"
+                    .enableCounter= "${this.enableCounter}"
+                    .enableArrows= "${this.enableArrows}"
                     @selected-item= "${this.__setSelectedIndex}"
                 >
                 </wui-carousel-wrapper>
                 <wui-carousel-navigation 
-                    .navigationItems= "${this.__getItems(this.carouselConfig, 'navigationBottom')}"
+                    .navigationItems= "${this.__getItems(this.carouselItems, 'navigationBottom')}"
                     .currentItemIndex= "${this.itemIndex}"
-                    .indicatorType= "${this.carouselConfig.indicatorType}"
+                    .indicatorType= "${this.indicatorType}"
                     @selected-item= "${this.__setSelectedIndex}"
                     exportparts="wui-carousel-custom-nav: wui-carousel-custom-nav"
                     >
@@ -69,10 +76,10 @@ export class WuiCarousel extends LitElement {
          this.itemIndex = event.detail.selectedIndex;
     }
 
-    __getItems({items = [] , maxItems}, listType) {
+    __getItems(items = [], listType) {
         // maximum items to be displayed in the UI.
-        const maxAllowed = 4;
-        const renderedList = items.slice(0, maxItems || maxAllowed);
+        const maxAllowed = (this.maxItems !== undefined ) ? this.maxItems : 4;
+        const renderedList = items.slice(0, maxAllowed);
         return renderedList.map((item) => {
             if(listType === 'wrapper') {
                 const {type, src, altText} = item;

@@ -42,8 +42,6 @@ export class WuiCarouselWrapper extends LitElement {
                 position: absolute;
                 opacity: 0.8;
                 right: 15px;
-                text-align: center;
-                width: 50px;
                 z-index: 1; 
             }
             .wui-carousel-button {
