@@ -6,6 +6,29 @@ wui-carousel component is JSON/data driven generic component which takes array o
 # Example
 `<wui-carousel></wui-carousel>`
 
+```css
+  <style>
+    wui-carousel {
+      --wui-carousel-counter-bg: rgb(90, 80, 80);
+      --wui-carousel-counter-color: black;
+       --wui-carousel-button-bg: blue;
+      --wui-carousel-button-border: 1px solid black;
+       --wui-carousel-button-color: orange;
+       --wui-carousel-button-stroke: #1e1d31;
+       --wui-carousel-nav-active-item-thumb: 3px solid #ff5900
+       --wui-carousel-navigation-shadow: 0px 4px 10px 2px rgba(168,166,168,1);
+       --wui-carousel-nav-active-item-thumb-border: purple;
+       /* Use when indicatorType = custom*/
+       --wui-carousel-custom-nav-active-bg: black;
+       --wui-carousel-align-navigation: center;
+    } 
+    /* Use when indicatorType = custom*/
+    wui-carousel::part(wui-carousel-custom-nav) {
+      background: green;
+    }
+  </style>
+```
+
 ```javascript
 <script>
 ((browser)=> {
