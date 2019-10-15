@@ -1,19 +1,19 @@
-import {LitElement, customElement, html, css, property} from 'lit-element';
-import {ListItem, SelectedItem, Thumbnail} from './types/wui-carousel.types';
-import './wui-carousel-wrapper/src/wui-carousel-wrapper.js';
-import './wui-carousel-navigation/src/wui-carousel-navigation.js';
+import {LitElement, customElement, html, css, property, TemplateResult} from 'lit-element';
+import {ListItem, ImageInterface} from './interface/wui-carousel.interface';
+import './wui-carousel-wrapper/src/wui-carousel-wrapper';
+import './wui-carousel-navigation/src/wui-carousel-navigation';
 
 @customElement('wui-carousel')
 export class WuiCarousel extends LitElement{
     private _itemIndex:number;
-    @property({type: Array}) carouselItems: [] = [];
-    @property({type: Boolean}) enableFullScreen: boolean = false;
-    @property({type: Boolean}) enableCounter: boolean = true;
-    @property({type: Boolean}) enableArrows: boolean = true;
-    @property({type: String}) indicatorType: String;
-    @property({type: Number}) maxItems: number;
-    @property({type: Number}) oldItemIndex: number = 0;
-    @property({type: Number}) 
+    @property() carouselItems: [] = [];
+    @property() enableFullScreen: boolean = false;
+    @property() enableCounter: boolean = true;
+    @property() enableArrows: boolean = true;
+    @property() oldItemIndex: number = 0;
+    @property() indicatorType: String;
+    @property() maxItems: number;
+    @property() 
     public get itemIndex(): number {
         return this._itemIndex;
     }
@@ -32,7 +32,7 @@ export class WuiCarousel extends LitElement{
         `
     }
 
-    render() {
+    render(): TemplateResult {
         return html `
             <div class= "wui-carousel">
                 <wui-carousel-wrapper 
@@ -56,11 +56,11 @@ export class WuiCarousel extends LitElement{
         `
     }
 
-    __setSelectedIndex(event: SelectedItem): void {
+    __setSelectedIndex(event: {detail: {selectedIndex: number}}): void {
         this.itemIndex = event.detail.selectedIndex;
    }
 
-   __getItems(items : ListItem[] = [], listType: string): ListItem[] | Thumbnail[] {
+   __getItems(items : ListItem[] = [], listType: string): ListItem[] | ImageInterface[] {
        // maximum items to be displayed in the UI.
        const maxAllowed: number =  this.maxItems ?? 4;
        const renderedList = items.slice(0, maxAllowed);
@@ -75,7 +75,7 @@ export class WuiCarousel extends LitElement{
                return listItem;
            }
            if(listType === 'navigationBottom') {
-               return item.thumbnail ?? {src: '', altText: ''};
+               return item.thumbnail ?? {src: null, altText: null};
            }
        });
    }
