@@ -33,11 +33,16 @@ export class WuiCarousel extends LitElement {
         this.enableCounter = true;
     }
 
-    shouldUpdate(changedProperties) {
-        const {itemIndex: oldItemIndex} = this.__getItemFromMap(changedProperties);
-        // TODO: change it to The nullish coalescing operator after TS integration.
-        this.oldItemIndex = (oldItemIndex !== undefined ) ? oldItemIndex : this.oldItemIndex;
-        return changedProperties.has('itemIndex');
+    
+    set itemIndex(value) {
+        const oldValue = this.itemIndex;
+        this.oldItemIndex = oldValue;
+        this._itemIndex = value;
+        this.requestUpdate('itemIndex', oldValue);
+    }
+    
+    get itemIndex () {
+        return this._itemIndex;
     }
 
     __getItemFromMap (updatedProps) {

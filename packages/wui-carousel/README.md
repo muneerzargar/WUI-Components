@@ -1,11 +1,12 @@
 # wui-carousel
-wui-carousel component is JSON/data driven generic component which takes array of objects as input and renders a carousel component in UI. The differentiaition is done on the basis of <strong> "Type"</strong> within each object of the array.
+wui-carousel component is JSON/data driven generic component which takes array of objects as input and renders a carousel component in UI. The differentiaition is done on the basis of  **"Type"** within each object of the array.
 
 `<wui-carousel></wui-carousel>`
 
 # Example
 `<wui-carousel></wui-carousel>`
-```
+
+```javascript
 <script>
 ((browser)=> {
   
@@ -74,39 +75,37 @@ wui-carousel component is JSON/data driven generic component which takes array o
 </script>
 ```
 # Scripts
-* Add npm scripts for installation...
+- [] Add npm scripts for installation...
 
 # TODO 
-* Add maximum slides to be present. 
-* Add icons for left and right.
-* Add indicators type for bottom navigation.
-* Add default animation.
-* Add css varaibles and mixins.
-* Add gestures.
-* Add story.
-* Add TypeScript.
-* Add generic interface file.
-* Add return type for the functions and use decorators.
-* Add tests.
-
-# After TODO.
-* set up npm package and publish.
+- [x] Add maximum slides to be present. 
+- [x] Add icons for left and right.
+- [x] Add indicators type for bottom navigation.
+- [x] Add default animation.
+- [x] Add css varaibles and mixins.
+- [x] Add gestures.
+- [x] Add story.
+- [] Add TypeScript.
+- [] Add generic interface file.
+- [] Add return type for the functions and use decorators.
+- [] Add tests.
+- [] set up npm package and publish.
 
 # Release 1.0.0
-* Check if custom Animation is supported out of box with mixins or other solution is needed. 
-* Verify and add the desired animation.
-* Add list of supported browsers.
+- [] Check if custom Animation is supported out of box with mixins or other solution is needed. 
+- [] Verify and add the desired animation.
+- [] Add list of supported browsers.
 
 # Release 1.1.0
-* Add support for html tags.
-* Add support for full screen such that z-index of the component takes top precedence. 
-* Add support for Video.
+- [] Add support for html tags.
+- [] Add support for full screen such that z-index of the component takes top precedence. 
+- [] Add support for Video.
 
 # Near Future (After release)
-* Add A11Y aka accessibility.
-* Pre-fetch and pre-load images for performance optimization
-* Add lazy loading of images in carousel and in navigation.
-* Add indicators when type is thumbnail such that we accept a configuartion of max elements per batch.
-* Dispatch event up notifying the component is loaded in DOM for computation of scroll positions if ever needed.
-* Room for more :)
+- [] Add A11Y aka accessibility.
+- [] Pre-fetch and pre-load images for performance optimization
+- [] Add lazy loading of images in carousel and in navigation.
+- [] Add indicators when type is thumbnail such that we accept a configuartion of max elements per batch.
+- [] Dispatch event up notifying the component is loaded in DOM for computation of scroll positions if ever needed.
+- [] Room for more :)
 

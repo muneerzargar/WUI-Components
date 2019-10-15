@@ -56,7 +56,7 @@ import markdownNotes from '../../README.md';
         enableFullScreen: true,
         enableCounter: true,
         enableArrows: true,
-        indicatorType: 'thumbnail', //thumbnail/ custom where custom is adding custom css to indicators which are radios at core with default css.
+        indicatorType: 'thumbnail', // thumbnail/ custom where custom is adding custom css to indicators which are radios at core with default css.
         maxItems: 5
     }
   

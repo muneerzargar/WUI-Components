@@ -20,7 +20,7 @@ export class WuiCarouselNavigation extends LitElement {
             }
             ul {
                 display: flex;
-                justify-content: left;
+                justify-content: var(--wui-carousel-align-navigation, left);
                 padding: 0 2px;
                 list-style: none;
                 margin: 15px 0;
