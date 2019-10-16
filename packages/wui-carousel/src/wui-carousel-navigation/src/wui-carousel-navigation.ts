@@ -1,6 +1,6 @@
 import {LitElement, customElement, property, html, css, TemplateResult} from 'lit-element';
 import {classMap} from 'lit-html/directives/class-map.js';
-import {ImageInterface} from '../../interface/wui-carousel.interface';
+import {ImageInterface} from '../../types/wui-carousel.types';
 import '../../wui-carousel-wrapper/src/wui-carousel-image/wui-carousel-image';
 
 

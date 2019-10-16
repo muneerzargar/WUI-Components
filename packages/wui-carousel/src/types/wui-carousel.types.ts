@@ -1,11 +1,11 @@
-export interface ListItem {
+export type ListItem = {
     type: string
     src: string,
     altText: string,
     thumbnail ?: ImageInterface
 }
 
-export interface ImageInterface {
+export type ImageInterface = {
     src: string,
     altText: string   
 }

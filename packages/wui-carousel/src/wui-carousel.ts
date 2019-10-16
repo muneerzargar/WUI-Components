@@ -1,5 +1,5 @@
 import {LitElement, customElement, html, css, property, TemplateResult} from 'lit-element';
-import {ListItem, ImageInterface} from './interface/wui-carousel.interface';
+import {ListItem, ImageInterface} from './types/wui-carousel.types';
 import './wui-carousel-wrapper/src/wui-carousel-wrapper';
 import './wui-carousel-navigation/src/wui-carousel-navigation';
 

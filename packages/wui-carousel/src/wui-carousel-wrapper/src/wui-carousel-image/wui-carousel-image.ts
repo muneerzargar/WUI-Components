@@ -1,5 +1,5 @@
 import {LitElement, customElement, property, html, css, TemplateResult} from 'lit-element'; 
-import {ImageInterface} from '../../../interface/wui-carousel.interface';
+import {ImageInterface} from '../../../types/wui-carousel.types';
 
 @customElement('wui-carousel-image')
 export class WuiCarouselImage extends LitElement {
