@@ -1,3 +1,4 @@
+
 import {LitElement, html, css} from 'lit-element'; 
 
 class WuiCarouselImage extends LitElement {
@@ -14,7 +15,6 @@ class WuiCarouselImage extends LitElement {
                 display: block;
             }
             img {
-                width: 100%;
                 max-width: 100%;
             }
         `

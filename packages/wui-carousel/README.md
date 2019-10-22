@@ -111,9 +111,7 @@ wui-carousel component is JSON/data driven generic component which takes array o
 - [x] Add TypeScript.
 - [x] Add generic interface file.
 - [x] Add return type for the functions and use decorators.
-- [] Add rule to compile typescript to javaScript.
 - [] Add tests.
-- [] set up npm package and publish.
 
 # Release 1.0.0
 - [] Check if custom Animation is supported out of box with mixins or other solution is needed. 
