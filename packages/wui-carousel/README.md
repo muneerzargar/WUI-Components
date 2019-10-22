@@ -1,11 +1,35 @@
 # wui-carousel
-wui-carousel component is JSON/data driven generic component which takes array of objects as input and renders a carousel component in UI. The differentiaition is done on the basis of <strong> "Type"</strong> within each object of the array.
+wui-carousel component is JSON/data driven generic component which takes array of objects as input and renders a carousel component in UI. The differentiaition is done on the basis of  **"Type"** within each object of the array.
 
 `<wui-carousel></wui-carousel>`
 
 # Example
 `<wui-carousel></wui-carousel>`
+
+```css
+  <style>
+    wui-carousel {
+      --wui-carousel-counter-bg: rgb(90, 80, 80);
+      --wui-carousel-counter-color: black;
+       --wui-carousel-button-bg: blue;
+      --wui-carousel-button-border: 1px solid black;
+       --wui-carousel-button-color: orange;
+       --wui-carousel-button-stroke: #1e1d31;
+       --wui-carousel-nav-active-item-thumb: 3px solid #ff5900
+       --wui-carousel-navigation-shadow: 0px 4px 10px 2px rgba(168,166,168,1);
+       --wui-carousel-nav-active-item-thumb-border: purple;
+       /* Use when indicatorType = custom*/
+       --wui-carousel-custom-nav-active-bg: black;
+       --wui-carousel-align-navigation: center;
+    } 
+    /* Use when indicatorType = custom*/
+    wui-carousel::part(wui-carousel-custom-nav) {
+      background: green;
+    }
+  </style>
 ```
+
+```javascript
 <script>
 ((browser)=> {
   
@@ -60,49 +84,50 @@ wui-carousel component is JSON/data driven generic component which takes array o
     enableFullScreen: true,
     enableCounter: true,
     enableArrows: true,
-    enableIndicators: false,
-    enableThumbnails: true
+    indicatorType: 'thumbnail'
 
   }
 
   const element = browser.document.querySelector('wui-carousel');
-  element.carouselConfig = carouselData;
-  console.log(element.carouselconfig);
+  element.carouselItems = carouselData.items;
+  element.enableCounter = carouselData.enableCounter;
+  element.enableArrows = carouselData.enableArrows;
+  element.indicatorType = carouselData.indicatorType;
 
 })(window);
 </script>
 ```
 # Scripts
-* Add npm scripts for installation...
+- [] Add npm scripts for installation...
 
 # TODO 
-* Add maximum slides to be present.
-* Add indicators type for bottom navigation.
-* Add default animation.
-* Add css mixins.
-* Add tests.
-* Add story.
-
-# After TODO.
-* set up npm package and publish.
+- [x] Add maximum slides to be present. 
+- [x] Add icons for left and right.
+- [x] Add indicators type for bottom navigation.
+- [x] Add default animation.
+- [x] Add css varaibles and mixins.
+- [x] Add gestures.
+- [x] Add story.
+- [x] Add TypeScript.
+- [x] Add generic interface file.
+- [x] Add return type for the functions and use decorators.
+- [] Add tests.
 
 # Release 1.0.0
-* Check if custom Animation is supported out of box with mixins or other solution is needed. 
-* Verify and add the desired animation.
-* Add Typescript.
-* Add generic interface file.
-* Add return type for the functions and use decorators.
+- [] Check if custom Animation is supported out of box with mixins or other solution is needed. 
+- [] Verify and add the desired animation.
+- [] Add list of supported browsers.
 
 # Release 1.1.0
-* Add support for html tags.
-* Add support for full screen such that z-index of the component takes top precedence. 
-* Add support for Video.
+- [] Add support for html tags.
+- [] Add support for full screen such that z-index of the component takes top precedence. 
+- [] Add support for Video.
 
 # Near Future (After release)
-* Add A11Y aka accessibility.
-* Pre-fetch and pre-load images for performance optimization
-* Add lazy loading of images in carousel and in navigation.
-* Add indicators when type is thumbnail such that we accept a configuartion of max elements per batch.
-* Dispatch event up notifying the component is loaded in DOM for computation of scroll positions if ever needed.
-* Room for more :)
+- [] Add A11Y aka accessibility.
+- [] Pre-fetch and pre-load images for performance optimization
+- [] Add lazy loading of images in carousel and in navigation.
+- [] Add indicators when type is thumbnail such that we accept a configuartion of max elements per batch.
+- [] Dispatch event up notifying the component is loaded in DOM for computation of scroll positions if ever needed.
+- [] Room for more :)
 

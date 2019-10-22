@@ -1,17 +1,15 @@
-import {LitElement, html, css} from 'lit-element';
+import {LitElement, customElement, property, html, css, TemplateResult} from 'lit-element';
 import {classMap} from 'lit-html/directives/class-map.js';
-import '../../wui-carousel-wrapper/src/wui-carousel-image/wui-carousel-image.js';
+import {ImageInterface} from '../../types/wui-carousel.types';
+import '../../wui-carousel-wrapper/src/wui-carousel-image/wui-carousel-image';
 
 
+@customElement('wui-carousel-navigation')
 export class WuiCarouselNavigation extends LitElement {
-    static get properties() {
-        return {
-            navigationItems: { type: Array },
-            currentItemIndex: {type: Number},
-            activeClass: {type: Boolean},
-            indicatorType: {type: String},
-        };
-    }
+    @property() navigationItems: ImageInterface[];
+    @property() currentItemIndex: number;
+    @property() activeClass: boolean = false;
+    @property() indicatorType: string;
 
     static get styles() {
         return css `
@@ -20,7 +18,7 @@ export class WuiCarouselNavigation extends LitElement {
             }
             ul {
                 display: flex;
-                justify-content: left;
+                justify-content: var(--wui-carousel-align-navigation, left);
                 padding: 0 2px;
                 list-style: none;
                 margin: 15px 0;
@@ -37,7 +35,7 @@ export class WuiCarouselNavigation extends LitElement {
             }
             wui-carousel-image, .wui-carousel-custom-nav {
                 display: block;
-                box-shadow: 0px 4px 10px 2px rgba(168,166,168,1);
+                box-shadow: var(--wui-carousel-navigation-shadow, 0px 4px 10px 2px rgba(168,166,168,1));
             }
             .wui-carousel-custom-nav {
                 background: #adadad;
@@ -48,38 +46,31 @@ export class WuiCarouselNavigation extends LitElement {
             }
             .wui-carousel-custom-nav input[type = "radio"] {
                 visibility : hidden;
-            }
-            
+            } 
             .wui-carousel-active-item {
                 opacity: 1;
                 position: relative;
-            }
-            
+            }  
             .wui-carousel-active-item .wui-carousel-custom-nav {
-                background: #333333;
+                background: var(--wui-carousel-custom-nav-active-bg, #333333);
             }
+
             .wui-carousel-active-item__selected {
                 bottom: 0;
-                border-bottom: 4px solid #ff5900;
+                border-bottom: var(--wui-carousel-nav-active-item-thumb-border, 4px solid #ff5900);
                 position: absolute;
                 width: 100%;
             }
         `
     }
     
-
-    constructor() {
-        super();
-        this.activeClass = false;
-    }
-
-    render() {
+    render(): TemplateResult {
         return html `
         ${(this.indicatorType) && this.navigationItems && this.navigationItems.length > 0 ? this.__getItemsTemplate(this.navigationItems) : null }
         `
     }
 
-    __getItemsTemplate(items) {
+    __getItemsTemplate(items: ImageInterface[]): TemplateResult {
         const templateItems = items.slice();
         return html `
         <ul>
@@ -93,7 +84,7 @@ export class WuiCarouselNavigation extends LitElement {
         `
     }
 
-    __getIndicatorList(item, key) {
+    __getIndicatorList(item: ImageInterface, key: number): TemplateResult {
         switch(this.indicatorType) {
             case 'thumbnail': {
                 return html `
@@ -107,7 +98,7 @@ export class WuiCarouselNavigation extends LitElement {
             }
             case 'custom': {
                 return html `
-                    <label class="wui-carousel-custom-nav">
+                    <label part="wui-carousel-custom-nav" class="wui-carousel-custom-nav">
                         <input type="radio" name="indicator" value= "${key}">
                     </label>
                 `
@@ -117,12 +108,10 @@ export class WuiCarouselNavigation extends LitElement {
         }
     }
 
-    __onNavigationClick(currentIndex) {
+    __onNavigationClick(currentIndex: number): void {
         this.dispatchEvent(new CustomEvent('selected-item', { detail: {selectedIndex: currentIndex}}));
     }
 
 
 
 }
-
-customElements.define('wui-carousel-navigation', WuiCarouselNavigation);
