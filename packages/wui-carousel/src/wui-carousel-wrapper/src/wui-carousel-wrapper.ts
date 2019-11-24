@@ -1,15 +1,15 @@
 import {LitElement, property, customElement, html, css, TemplateResult} from 'lit-element';
-import {ListItem} from '../../types/wui-carousel.types';
+import {ListItem} from '../../interfaces/wui-carousel.interface';
 import './wui-carousel-image/wui-carousel-image'
 
 @customElement('wui-carousel-wrapper')
 export class WuiCarouselWrapper extends LitElement {
-    private __touchstartX: number;
-    @property() carouselItems: ListItem[]
-    @property() currentIndex: number
-    @property() prevIndex: number
-    @property() enableCounter: boolean
-    @property() enableArrows: boolean
+    private __touchstartX = 0;
+    @property() carouselItems: ListItem[] = [];
+    @property() currentIndex = 0;
+    @property() prevIndex = 0;
+    @property() enableCounter = false;
+    @property() enableArrows = false;
    
     static get styles() {
         return css `
@@ -124,9 +124,14 @@ export class WuiCarouselWrapper extends LitElement {
     }
 
     firstUpdated(): void {
-        this.__touchstartX = 0;
-        this.shadowRoot.querySelector('ul').addEventListener('touchstart', this.__touchstart.bind(this));
-        this.shadowRoot.querySelector('ul').addEventListener('touchend', this.__touchend.bind(this));
+        //this.__touchstartX = 0;
+        this.shadowRoot.querySelector('ul')?.addEventListener('touchstart', this.__touchstart.bind(this));
+        this.shadowRoot.querySelector('ul')?.addEventListener('touchend', this.__touchend.bind(this));
+    }
+
+    disconnectedCallback(): void {
+        this.shadowRoot.querySelector('ul')?.removeEventListener('touchstart', this.__touchstart.bind(this));
+        this.shadowRoot.querySelector('ul')?.removeEventListener('touchend', this.__touchend.bind(this));
     }
 
     updated(): void {
@@ -153,6 +158,7 @@ export class WuiCarouselWrapper extends LitElement {
                 ${this.__getItemType(templateItems[this.prevIndex])}
             </li>
             <li id='newCarousel' role='button'>
+                ----${this.currentIndex}
                 ${this.__getItemType(templateItems[this.currentIndex])}
             </li>
         </ul>
@@ -197,7 +203,7 @@ export class WuiCarouselWrapper extends LitElement {
     }
 
     __getItemType(item: ListItem): TemplateResult {
-        switch (item.type) {
+        switch (item?.type) {
             case 'image': {
                 return html`<wui-carousel-image .imageItem="${item}"></wui-carousel-image>`;
             }

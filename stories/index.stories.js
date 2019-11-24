@@ -1,1 +1,1 @@
-import  '../packages/wui-carousel/src/stories/wui-carousel.stories.js';
+import  '../packages/wui-carousel/src/stories/index.stories.js';

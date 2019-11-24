@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/html';
 import { withKnobs, object, boolean, number } from '@storybook/addon-knobs';
 import markdownNotes from '../../README.md';
 
-import '../wui-carousel.js';
+import '../../dist/wui-carousel.js';
 
 const carouselData = {
   items: [

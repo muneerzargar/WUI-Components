@@ -1,15 +1,15 @@
 import {LitElement, customElement, property, html, css, TemplateResult} from 'lit-element';
 import {classMap} from 'lit-html/directives/class-map.js';
-import {ImageInterface} from '../../types/wui-carousel.types';
+import {ImageInterface} from '../../interfaces/wui-carousel.interface';
 import '../../wui-carousel-wrapper/src/wui-carousel-image/wui-carousel-image';
 
 
 @customElement('wui-carousel-navigation')
 export class WuiCarouselNavigation extends LitElement {
-    @property() navigationItems: ImageInterface[];
-    @property() currentItemIndex: number;
+    @property() navigationItems: ImageInterface[] = [];
+    @property() currentItemIndex: number = 0;
     @property() activeClass: boolean = false;
-    @property() indicatorType: string;
+    @property() indicatorType: string = '';
 
     static get styles() {
         return css `
@@ -84,7 +84,7 @@ export class WuiCarouselNavigation extends LitElement {
         `
     }
 
-    __getIndicatorList(item: ImageInterface, key: number): TemplateResult {
+    __getIndicatorList(item: ImageInterface, key: number): TemplateResult | undefined {
         switch(this.indicatorType) {
             case 'thumbnail': {
                 return html `
@@ -111,7 +111,5 @@ export class WuiCarouselNavigation extends LitElement {
     __onNavigationClick(currentIndex: number): void {
         this.dispatchEvent(new CustomEvent('selected-item', { detail: {selectedIndex: currentIndex}}));
     }
-
-
 
 }

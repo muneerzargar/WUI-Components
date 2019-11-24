@@ -130,4 +130,3 @@ wui-carousel component is JSON/data driven generic component which takes array o
 - [] Add indicators when type is thumbnail such that we accept a configuartion of max elements per batch.
 - [] Dispatch event up notifying the component is loaded in DOM for computation of scroll positions if ever needed.
 - [] Room for more :)
-

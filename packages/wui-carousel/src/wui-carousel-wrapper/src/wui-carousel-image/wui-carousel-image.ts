@@ -1,11 +1,11 @@
 import {LitElement, customElement, property, html, css, TemplateResult} from 'lit-element'; 
-import {ImageInterface} from '../../../types/wui-carousel.types';
+import {ImageInterface} from '../../../interfaces/wui-carousel.interface';
 
 @customElement('wui-carousel-image')
 export class WuiCarouselImage extends LitElement {
     @property({type: Object}) imageItem: ImageInterface = {
-        src: null,
-        altText: null
+        src: '',
+        altText: ''
     };
 
     static get styles () {
