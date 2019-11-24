@@ -3,7 +3,9 @@
 > ## 🛠 Status: Work in progress
 > Idea is to create composite web components which would be used by
 > the developers in order to avoid creation of UI components. 
-> Collection of UI components which can be integrated by developers in > applications which are framework agnostic i.e. the components can be > used in any framework(although we need to add a HOC for the
+> Collection of UI components which can be integrated by developers in 
+> applications which are framework agnostic i.e. the components can be 
+> used in any framework(although we need to add a HOC for the
 > management of lifecycle) without the hassle of creating components 
 > from scratch.
 

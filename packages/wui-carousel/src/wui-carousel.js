@@ -45,13 +45,13 @@ export class WuiCarousel extends LitElement {
         return this._itemIndex;
     }
 
-    __getItemFromMap (updatedProps) {
-        return new Proxy(updatedProps, {
-          get (value, key) {
-            return value.get(key);
-          }
-        });
-    }
+    // __getItemFromMap (updatedProps) {
+    //     return new Proxy(updatedProps, {
+    //       get (value, key) {
+    //         return value.get(key);
+    //       }
+    //     });
+    // }
 
     render() {
         return html `
