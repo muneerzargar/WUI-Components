@@ -2,17 +2,17 @@
   "compilerOptions": {
     /* Basic Options */
     // "incremental": true,                   /* Enable incremental compilation */
-    "target": "ESNEXT",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019' or 'ESNEXT'. */
+    "target": "ES2017",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019' or 'ESNEXT'. */
     "module": "ESNEXT",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
     "lib": ["esnext", "dom"],                             /* Specify library files to be included in the compilation. */
     "allowJs": true,                       /* Allow javascript files to be compiled. */
     "checkJs": true,                       /* Report errors in .js files. */
-    "noEmit": true,                        /* Do not emit outputs. */
+    //"noEmit": true,                        /* Do not emit outputs. */
     "strict": false,                           /* Enable all strict type-checking options. */
     "noImplicitThis": true,                /* Raise error on 'this' expressions with an implied 'any' type. */
     "alwaysStrict": true,                  /* Parse in strict mode and emit "use strict" for each source file. */
      // "jsx": "preserve",                     /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
-    // "declaration": true,                   /* Generates corresponding '.d.ts' file. */
+    "declaration": true,                   /* Generates corresponding '.d.ts' file. */
     // "declarationMap": true,                /* Generates a sourcemap for each corresponding '.d.ts' file. */
     // "sourceMap": true,                     /* Generates corresponding '.map' file. */
     // "outFile": "./",                       /* Concatenate and emit output to single file. */
@@ -27,7 +27,7 @@
 
     /* Strict Type-Checking Options */
     
-    // "noImplicitAny": true,                 /* Raise error on expressions and declarations with an implied 'any' type. */
+    "noImplicitAny": true,                 /* Raise error on expressions and declarations with an implied 'any' type. */
     // "strictNullChecks": true,              /* Enable strict null checks. */
     // "strictFunctionTypes": true,           /* Enable strict checking of function types. */
     // "strictBindCallApply": true,           /* Enable strict 'bind', 'call', and 'apply' methods on functions. */
@@ -64,10 +64,11 @@
     "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
   },
   "include": [
-    "packages/**/*",
-    "node_modules/@open-wc/**/*.js"
+    "packages/**/*"
   ],
   "exclude": [
-    "node_modules/!(@open-wc)"
+    "node_modules/!(@open-wc)",
+    "node_modules/@open-wc/**/*.js",
+    "**/**/stories/*.js"
   ]
 }

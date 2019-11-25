@@ -98,30 +98,32 @@ wui-carousel component is JSON/data driven generic component which takes array o
 </script>
 ```
 # Scripts
-- [] Add npm scripts for installation...
+*  [] Add npm scripts for installation...
 
 # TODO 
-- [x] Add maximum slides to be present. 
-- [x] Add icons for left and right.
-- [x] Add indicators type for bottom navigation.
-- [x] Add default animation.
-- [x] Add css varaibles and mixins.
-- [x] Add gestures.
-- [x] Add story.
-- [x] Add TypeScript.
-- [x] Add generic interface file.
-- [x] Add return type for the functions and use decorators.
-- [] Add tests.
+* [x] Add maximum slides to be present. 
+* [x] Add icons for left and right.
+* [x] Add indicators type for bottom navigation.
+* [x] Add default animation.
+* [x] Add css varaibles and mixins.
+* [x] Add gestures.
+* [x] Add story.
+* [x] Add TypeScript.
+* [x] Add generic interface file.
+* [x] Add return type for the functions and use decorators.
+* [] Fix TS issues.
+* [] Add Story with TS.
+* [] Add tests.
 
 # Release 1.0.0
-- [] Check if custom Animation is supported out of box with mixins or other solution is needed. 
-- [] Verify and add the desired animation.
-- [] Add list of supported browsers.
+* [] Check if custom Animation is supported out of box with mixins or other solution is needed. 
+* [] Verify and add the desired animation.
+* [] Add list of supported browsers.
 
 # Release 1.1.0
-- [] Add support for html tags.
-- [] Add support for full screen such that z-index of the component takes top precedence. 
-- [] Add support for Video.
+* [] Add support for html tags.
+* [] Add support for full screen such that z-index of the component takes top precedence. 
+* [] Add support for Video.
 
 # Near Future (After release)
 - [] Add A11Y aka accessibility.

@@ -1,15 +1,15 @@
 import {LitElement, property, customElement, html, css, TemplateResult} from 'lit-element';
-import {ListItem} from '../../types/wui-carousel.types';
+import {ListItem} from '../../Interfaces/wui-carousel.interfaces';
 import './wui-carousel-image/wui-carousel-image'
 
 @customElement('wui-carousel-wrapper')
 export class WuiCarouselWrapper extends LitElement {
     private __touchstartX: number;
-    @property() carouselItems: ListItem[]
-    @property() currentIndex: number
-    @property() prevIndex: number
-    @property() enableCounter: boolean
-    @property() enableArrows: boolean
+    @property() carouselItems: ListItem[] = [];
+    @property() currentIndex: number;
+    @property() prevIndex: number;
+    @property() enableCounter: boolean;
+    @property() enableArrows: boolean;
    
     static get styles() {
         return css `

@@ -3,17 +3,19 @@
 > ## 🛠 Status: Work in progress
 > Idea is to create composite web components which would be used by
 > the developers in order to avoid creation of UI components. 
-> Collection of UI components which can be integrated by developers in > applications which are framework agnostic i.e. the components can be > used in any framework(although we need to add a HOC for the
+> Collection of UI components which can be integrated by developers in 
+> applications which are framework agnostic i.e. the components can be 
+> used in any framework(although we need to add a HOC for the
 > management of lifecycle) without the hassle of creating components 
 > from scratch.
 
 # Next steps/ TODO 
-- [] Add Lerna for mono-repo.
-- [] Add Yarn-workspace or similar.
-- [] Remove common dependencies from the packages and add them in root package.json 
-- [] Add rule for compiling typescript to javaScript.
-- [] Add tests.
-- [] set up npm package and publish.
+*   [x] Add Lerna for mono-repo.
+*   [x] Add Yarn.
+*   [x] Remove common dependencies from the packages and add them in root package.json 
+*   [x] Add rule for compiling typescript to javaScript.
+*   [] Add tests.
+*   [] set up npm package and publish.
 
 ## Scripts
 - `start:build` runs your app after it has been built using the build command
