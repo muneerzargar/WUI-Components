@@ -10,12 +10,12 @@
 > from scratch.
 
 # Next steps/ TODO 
-- [] Add Lerna for mono-repo.
-- [] Add Yarn-workspace or similar.
-- [] Remove common dependencies from the packages and add them in root package.json 
-- [] Add rule for compiling typescript to javaScript.
-- [] Add tests.
-- [] set up npm package and publish.
+*   [x] Add Lerna for mono-repo.
+*   [x] Add Yarn.
+*   [x] Remove common dependencies from the packages and add them in root package.json 
+*   [x] Add rule for compiling typescript to javaScript.
+*   [] Add tests.
+*   [] set up npm package and publish.
 
 ## Scripts
 - `start:build` runs your app after it has been built using the build command
