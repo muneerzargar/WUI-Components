@@ -8,8 +8,8 @@
     "allowJs": true,                       /* Allow javascript files to be compiled. */
     "checkJs": true,                       /* Report errors in .js files. */
     //"noEmit": true,                        /* Do not emit outputs. */
-    "strict": false,                           /* Enable all strict type-checking options. */
-    "noImplicitThis": true,                /* Raise error on 'this' expressions with an implied 'any' type. */
+    "strict": true,                           /* Enable all strict type-checking options. */
+    //"noImplicitThis": true,                /* Raise error on 'this' expressions with an implied 'any' type. */
     "alwaysStrict": true,                  /* Parse in strict mode and emit "use strict" for each source file. */
      // "jsx": "preserve",                     /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
     "declaration": true,                   /* Generates corresponding '.d.ts' file. */

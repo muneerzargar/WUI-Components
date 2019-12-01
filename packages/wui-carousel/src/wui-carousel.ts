@@ -5,13 +5,14 @@ import './wui-carousel-navigation/src/wui-carousel-navigation';
 
 @customElement('wui-carousel')
 export class WuiCarousel extends LitElement{
-    @property() carouselItems: ListItem[] = [];
+    
+    @property() carouselItems: ListItem[] = [] ;
     @property() enableFullScreen: boolean = false;
     @property() enableCounter: boolean = true;
     @property() enableArrows: boolean = true;
     @property() oldItemIndex: number = 0;
-    @property() indicatorType: string;
-    @property() maxItems: number;
+    @property() indicatorType: string = '';
+    @property() maxItems: number | undefined;
     private _itemIndex:number = 0;
     public get itemIndex(): number {
         return this._itemIndex;
@@ -55,29 +56,31 @@ export class WuiCarousel extends LitElement{
         `
     }
 
-    __setSelectedIndex(event: {detail: {selectedIndex: number}}): void {
+    private __setSelectedIndex(event: {detail: {selectedIndex: number}}): void {
         this.itemIndex = event.detail.selectedIndex;
-   }
+    }
 
-   __getItems(items : ListItem [] = [], listType: string): ListItem[] | ImageInterface[] {
-       // maximum items to be displayed in the UI.
-       const maxAllowed: number =  this.maxItems ?? 4;
-       const renderedList = items.slice(0, maxAllowed);
-       return renderedList.map((item: ListItem) => {
-           if(listType === 'wrapper') {
-               const {type, src, altText} = item;
-               const listItem : ListItem = {
-                   type,
-                   src, 
-                   altText
-               };
-               return listItem;
-           }
-           if(listType === 'navigationBottom') {
-               return item.thumbnail ?? {src: null, altText: null};
-           }
-       });
-   }
+   //TODO: Fix return type here .
+
+    private __getItems(items : ListItem [] = [], listType: string) {
+        const maxAllowed: number =  this.maxItems ?? 4;
+        const renderedList  = items.slice(0, maxAllowed);
+        return renderedList.map((item: ListItem) => {
+            if(listType === 'wrapper') {
+                const {type, src, altText} = item;
+                const listItem : ListItem = {
+                    type,
+                    src, 
+                    altText
+                };
+                return listItem;
+            }
+            else if(listType === 'navigationBottom') {
+                const defaultNav: ImageInterface = {src: '', altText: 'null'} 
+                return item.thumbnail ?? defaultNav;
+            }
+        });
+    }
     
 }
 

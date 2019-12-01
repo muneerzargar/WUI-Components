@@ -4,12 +4,12 @@ import './wui-carousel-image/wui-carousel-image'
 
 @customElement('wui-carousel-wrapper')
 export class WuiCarouselWrapper extends LitElement {
-    private __touchstartX: number;
+    private __touchstartX: number | undefined;
     @property() carouselItems: ListItem[] = [];
-    @property() currentIndex: number;
-    @property() prevIndex: number;
-    @property() enableCounter: boolean;
-    @property() enableArrows: boolean;
+    @property() currentIndex= 0;
+    @property() prevIndex= 0;
+    @property() enableCounter = true;
+    @property() enableArrows= true;
    
     static get styles() {
         return css `
@@ -123,10 +123,16 @@ export class WuiCarouselWrapper extends LitElement {
         `
     }
 
+
     firstUpdated(): void {
         this.__touchstartX = 0;
-        this.shadowRoot.querySelector('ul').addEventListener('touchstart', this.__touchstart.bind(this));
-        this.shadowRoot.querySelector('ul').addEventListener('touchend', this.__touchend.bind(this));
+        this?.shadowRoot?.querySelector('ul')?.addEventListener('touchstart', (ev:TouchEvent)=> this.__touchstart(ev));
+        this?.shadowRoot?.querySelector('ul')?.addEventListener('touchend',  (ev:TouchEvent)=> this.__touchend(ev));
+    }
+
+    disconnectedCallback() {
+        this?.shadowRoot?.querySelector('ul')?.removeEventListener('touchstart', this.__touchstart.bind(this));
+        this?.shadowRoot?.querySelector('ul')?.removeEventListener('touchend',  this.__touchend.bind(this));
     }
 
     updated(): void {
@@ -159,29 +165,29 @@ export class WuiCarouselWrapper extends LitElement {
         `
     }
 
-    __touchstart(event: { touches: { clientX: number}[]}) : void { 
+    __touchstart(event: TouchEvent) : void { 
         this.__touchstartX = event.touches[0].clientX;
     }
 
-    __touchend(event: { changedTouches: { clientX: number}[]}): void {
-        const offset = 100;
+    __touchend(event: TouchEvent): void {
+        const offset = 50;
         if(this.__touchstartX) {
            const touchEnd = event.changedTouches[0].clientX;
             if(touchEnd > this.__touchstartX + offset) {
-                this.__onItemChange('right');
+                this.__onItemChange('left'); 
             }
             if(touchEnd < this.__touchstartX - offset) {
-                this.__onItemChange('left');
+                this.__onItemChange('right');
             }
         }
     }
  
     __getAnimationCssClass(): void {
-        const liGroup = this.shadowRoot.querySelectorAll('li');
+        const liGroup = this?.shadowRoot?.querySelectorAll('li');
         if(this.currentIndex === this.prevIndex) {
             return;
         }
-        liGroup.forEach((li)=> {
+        liGroup?.forEach((li)=> {
             const list = li
             list.className = '';
             setTimeout(()=> {
@@ -192,7 +198,7 @@ export class WuiCarouselWrapper extends LitElement {
                 else if(list.id === 'newCarousel') {
                     list.className = (this.currentIndex < this.prevIndex) ? 'wui-new-carousel-slide-out' : 'wui-new-carousel-slide-in';
                 }
-            }, 0);
+            }, 10);
         });  
     }
 
@@ -205,6 +211,7 @@ export class WuiCarouselWrapper extends LitElement {
                 break;
             }
         }
+        return html `null`;
     }
 
     __getArrowsTemplate(): TemplateResult {

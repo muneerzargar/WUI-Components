@@ -6,10 +6,10 @@ import '../../wui-carousel-wrapper/src/wui-carousel-image/wui-carousel-image';
 
 @customElement('wui-carousel-navigation')
 export class WuiCarouselNavigation extends LitElement {
-    @property() navigationItems: ImageInterface[];
-    @property() currentItemIndex: number;
-    @property() activeClass: boolean = false;
-    @property() indicatorType: string;
+    @property() navigationItems: ImageInterface[] = [];
+    @property() currentItemIndex = 0;
+    @property() activeClass = false;
+    @property() indicatorType = 'thumbnail';
 
     static get styles() {
         return css `
@@ -106,6 +106,7 @@ export class WuiCarouselNavigation extends LitElement {
             default: 
                 break;
         }
+        return html `null`;
     }
 
     __onNavigationClick(currentIndex: number): void {
