@@ -159,7 +159,7 @@ export class WuiCarouselWrapper extends LitElement {
     __getAnimationCssClass() {
         const liGroup = this.shadowRoot.querySelectorAll('li');
         if(liGroup.length === 0) {
-            return ''
+            return;
         }
         liGroup.forEach((li)=> {
             li.className = '';
