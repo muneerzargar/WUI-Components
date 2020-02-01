@@ -12,7 +12,7 @@
 
 # Next steps/ TODO
 
-- [x] Add Lerna for mono-repo.
+- [x] Add Lerna for mono repo.
 - [x] Add Yarn.
 - [x] Remove common dependencies from the packages and add them in root package.json
 - [x] Add rule for compiling typescript to javaScript.
