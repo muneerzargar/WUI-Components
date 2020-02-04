@@ -76,20 +76,20 @@ export class WuiCarouselWrapper extends LitElement {
         right: 15px;
       }
       .wui-old-carousel-slide-out {
-        animation: wui-old-carousel-slide-out 700ms forwards;
+        animation: wui-old-carousel-slide-out 800ms forwards;
       }
       .wui-new-carousel-slide-out {
-        animation: wui-new-carousel-slide-out 700ms forwards;
+        animation: wui-new-carousel-slide-out 800ms forwards;
       }
       .wui-old-carousel-slide-in {
-        animation: wui-old-carousel-slide-in 700ms forwards;
+        animation: wui-old-carousel-slide-in 800ms forwards;
       }
       .wui-new-carousel-slide-in {
-        animation: wui-new-carousel-slide-in 700ms forwards;
+        animation: wui-new-carousel-slide-in 800ms forwards;
       }
       @keyframes wui-old-carousel-slide-in {
         0% {
-          transform: translateX(50%);
+          transform: translateX(0%);
         }
         100% {
           transform: translateX(-100%);
@@ -137,8 +137,10 @@ export class WuiCarouselWrapper extends LitElement {
   }
 
   __changeItem() {
-    console.log('called');
     this.__resetAnimation();
+    // setTimeout(() => {
+    //   this.__setAnimationCssClass();
+    // });
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         this.__setAnimationCssClass();
